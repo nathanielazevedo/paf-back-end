@@ -1,9 +1,10 @@
 
 const SECRET_KEY = "azevedo_hidden";
 
-const DB_URI = (process.env.NODE_ENV === "test") 
+const DB_URI =
+  process.env.NODE_ENV === "test"
     ? "postgresql:///paf_test"
-    : "postgresql:///paf";
+    : process.env.DATABASE_URL || "postgresql:///paf";
   
 const BCRYPT_WORK_FACTOR = 12;
 
