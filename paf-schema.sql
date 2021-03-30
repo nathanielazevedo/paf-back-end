@@ -1,0 +1,35 @@
+-- DROP DATABASE paf;
+-- CREATE DATABASE paf;
+
+CREATE TABLE users (
+  username VARCHAR(25) PRIMARY KEY,
+  password TEXT NOT NULL,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  email TEXT NOT NULL
+    CHECK (position('@' IN email) > 1),
+  is_admin BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+
+CREATE TABLE friends (
+  id SERIAL NOT NULL PRIMARY KEY,
+  name VARCHAR(25),
+  username VARCHAR(25) REFERENCES users ON DELETE CASCADE,
+  description VARCHAR(55)
+);
+
+CREATE TABLE statements ( 
+  id SERIAL NOT NULL PRIMARY KEY,
+  statement TEXT NOT NULL,
+  friend_id INTEGER REFERENCES friends ON DELETE CASCADE,
+  username VARCHAR(25) REFERENCES users ON DELETE CASCADE
+);
+
+
+CREATE TABLE responses (
+  id SERIAL NOT NULL PRIMARY KEY,
+  statement_id INTEGER REFERENCES statements ON DELETE CASCADE,
+  response TEXT NOT NULL,
+  username VARCHAR(25) REFERENCES users ON DELETE CASCADE
+);

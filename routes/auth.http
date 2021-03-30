@@ -1,0 +1,23 @@
+
+### Login 
+
+POST http://localhost:3001/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "testuserupdated",
+    "password": "password"
+}
+
+### Signup
+
+POST http://localhost:3001/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "username": "testuser",
+    "password": "password",
+    "firstName": "test",
+    "lastName": "test",
+    "email": "test@test.com"
+}

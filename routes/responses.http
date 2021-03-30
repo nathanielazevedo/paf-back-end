@@ -1,0 +1,25 @@
+
+### POST /responses/:username - Adds a new response. 
+POST http://localhost:3001/responses/testuser HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjQ0MDExNX0.ZrWEL1CIt3UvIF1rqgWJvF6PvR7gTNgyjFS7zcSjXE8
+
+{
+    "statement_id": "8",
+    "response": "hello"
+}
+
+### DELETE a response. /resonses/:username/:statementId
+
+DELETE http://localhost:3001/responses/testuser/5 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjQ0MDExNX0.ZrWEL1CIt3UvIF1rqgWJvF6PvR7gTNgyjFS7zcSjXE8
+
+
+###UPDATE a response
+PATCH http://localhost:3001/responses/testuser/6
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjQ0MDExNX0.ZrWEL1CIt3UvIF1rqgWJvF6PvR7gTNgyjFS7zcSjXE8
+
+{
+    "response": "responseUpdate"
+}

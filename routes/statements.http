@@ -1,0 +1,32 @@
+
+###Add a statement to a friend. 
+POST http://localhost:3001/statements/testuser HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjQ0MDExNX0.ZrWEL1CIt3UvIF1rqgWJvF6PvR7gTNgyjFS7zcSjXE8
+
+{
+    "friend_id": "14",
+    "statement": "hey"
+}
+
+
+### GET all statements from a specific user. /statements/:statementId
+GET http://localhost:3001/statements/testuser/3 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjM1MjA4NX0.JK3G_u0MoXre-riQ3WI00mZyrhUdTq_xKwMEXJVJvLo
+
+ 
+
+### DELETE a statement. /statements/:username/:statementId
+
+DELETE http://localhost:3001/statements/testuser/5 HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjM1MjA4NX0.JK3G_u0MoXre-riQ3WI00mZyrhUdTq_xKwMEXJVJvLo
+
+
+###UPDATE a statement
+PATCH http://localhost:3001/statements/testuser/7
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjQ0MDExNX0.ZrWEL1CIt3UvIF1rqgWJvF6PvR7gTNgyjFS7zcSjXE8
+
+{
+    "statement": "statementUpdates"
+}

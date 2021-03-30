@@ -1,0 +1,26 @@
+
+
+###GET info on a user.
+GET http://localhost:3001/users/testuser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjQ0MDExNX0.ZrWEL1CIt3UvIF1rqgWJvF6PvR7gTNgyjFS7zcSjXE8
+
+
+
+### DELETE a user
+
+DELETE http://localhost:3001/users/testuser
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjM1MjA4NX0.JK3G_u0MoXre-riQ3WI00mZyrhUdTq_xKwMEXJVJvLo
+
+
+###UPDATE a user
+
+PATCH http://localhost:3001/users/testuser
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjM2OTIwMn0.UqKiLPXGkyQ42s4BKwZqTh6v46GICW6LMcyaB2CV9rY
+
+{
+    "username": "testuserupdateds",
+    "firstName": "testupdated",
+    "lastName": "testupdate",
+    "email": "testupdate@test.com"
+}

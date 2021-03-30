@@ -1,0 +1,9 @@
+
+POST http://localhost:3001/chat/testuser HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTYxNjM1MjA4NX0.JK3G_u0MoXre-riQ3WI00mZyrhUdTq_xKwMEXJVJvLo
+
+{
+    "statement": "hey",
+    "friend_id": "8"
+}
