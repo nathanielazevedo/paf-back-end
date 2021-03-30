@@ -1,6 +1,8 @@
 
 const SECRET_KEY = "azevedo_hidden";
 
+require("dotenv").config();
+
 const DB_URI =
   process.env.NODE_ENV === "test"
     ? "postgresql:///paf_test"
