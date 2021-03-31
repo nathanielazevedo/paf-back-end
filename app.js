@@ -10,10 +10,10 @@ const responsesRoute = require('./routes/responses');
 const cors = require("cors");
 const { authenticateJWT } = require("./middleware/auth");
 
-
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+
 app.use(authenticateJWT);
 
 //Routes
