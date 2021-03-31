@@ -13,7 +13,6 @@ require("dotenv").config();
 const BCRYPT_WORK_FACTOR = 12;
 
 module.exports = {
-    // DB_URI,
     SECRET_KEY,
   BCRYPT_WORK_FACTOR,
     getDatabaseUri
