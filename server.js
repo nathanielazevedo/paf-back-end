@@ -2,6 +2,8 @@
 
 const app = require("./app");
 
-app.listen(3001, function () {
-  console.log("App on port 3001");
+const { PORT } = require("./config");
+
+app.listen(PORT, function () {
+  console.log(`Started on http://localhost:${PORT}`);
 });

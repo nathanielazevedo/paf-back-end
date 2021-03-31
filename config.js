@@ -2,7 +2,7 @@
 const SECRET_KEY = "azevedo_hidden";
 
 require("dotenv").config();
-
+const PORT = +process.env.PORT || 3001;
 
   function getDatabaseUri() {
     return process.env.NODE_ENV === "test"
@@ -15,5 +15,6 @@ const BCRYPT_WORK_FACTOR = 12;
 module.exports = {
     SECRET_KEY,
   BCRYPT_WORK_FACTOR,
-    getDatabaseUri
+  getDatabaseUri,
+    PORT
 }
