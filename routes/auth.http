@@ -5,7 +5,7 @@ POST http://localhost:3001/auth/login HTTP/1.1
 content-type: application/json
 
 {
-    "username": "testuserupdated",
+    "username": "testuser",
     "password": "password"
 }
 
