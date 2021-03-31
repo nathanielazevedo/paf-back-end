@@ -18,9 +18,9 @@ let DB_URI = getDatabaseUri();
 //  console.log(ssl)
   const client = new Client({
     connectionString: DB_URI,
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    // ssl: {
+    //   rejectUnauthorized: false,
+    // },
   });
 
 client.connect();
