@@ -16,16 +16,16 @@ class Chat {
     }
 
     const word = parsed[Math.floor(Math.random() * parsed.length)];
-
+    console.log(word)
     const res = await db.query(
       `SELECT id FROM statements WHERE statement LIKE '%${word}%' AND friend_id = $1`,
       [friend_id]
     );
-
+    console.log(res.rows)
     if (res.rows.length < 1) {
       return "I have no response" ;
     }
-
+    
     let statementId = res.rows[Math.floor(Math.random() * res.rows.length)].id;
 
     let res2 = await db.query(
