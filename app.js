@@ -16,6 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(authenticateJWT);
 
+
 //Routes
 app.use('/auth', authRoute);
 app.use("/users", usersRoute);

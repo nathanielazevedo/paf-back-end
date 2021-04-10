@@ -27,11 +27,11 @@ class User {
       );
 
       const user = result.rows[0];
-
+      
       if (user) {
         const isValid = await bcrypt.compare(password, user.password);
 
-        if (isValid !== true) {
+        if (isValid === true) {
           delete user.password;
           return user;
         } else {
@@ -116,6 +116,9 @@ class User {
 
   //Update a user
   static async update(username, data) {
+    if (data.password) {
+      data.password = await bcrypt.hash(data.password, BCRYPT_WORK_FACTOR);
+    }
     const { setCols, values } = sqlForPartialUpdate(data, {
       firstName: "first_name",
       lastName: "last_name",
@@ -133,6 +136,7 @@ class User {
 
     const result = await db.query(querySql, [...values, username]);
     const user = result.rows[0];
+ 
     if (!user) throw new NotFoundError(`No user: ${username}`);
 
     return user;
