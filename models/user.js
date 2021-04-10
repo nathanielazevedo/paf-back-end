@@ -3,12 +3,14 @@
 const { BCRYPT_WORK_FACTOR } = require("../config");
 const db = require("../db");
 const bcrypt = require("bcrypt");
-const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
-const { sqlForPartialUpdate } = require("../helpers/sql")
-
+const {
+  NotFoundError,
+  BadRequestError,
+  UnauthorizedError,
+} = require("../expressError");
+const { sqlForPartialUpdate } = require("../helpers/sql");
 
 class User {
-
   //Handle user authentication.
   static async authenticate(username, password) {
     try {
@@ -28,19 +30,30 @@ class User {
 
       if (user) {
         const isValid = await bcrypt.compare(password, user.password);
-        if (isValid === true) {
+
+        if (isValid !== true) {
           delete user.password;
           return user;
+        } else {
+          throw new UnauthorizedError("Invalid username/password");
         }
+      } else {
+        throw new UnauthorizedError("Invalid username/password");
       }
     } catch {
       throw new UnauthorizedError("Invalid username/password");
     }
   }
 
-  
   //Handle user registration
-  static async register({username, password, firstName, lastName, email, isAdmin}) {
+  static async register({
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    isAdmin,
+  }) {
     const duplicateCheck = await db.query(
       `SELECT username
         FROM users
@@ -57,7 +70,7 @@ class User {
     let result = await db.query(
       `INSERT INTO users (username, password, first_name, last_name, email, is_admin)
         VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING username`,
+        RETURNING username, first_name AS "firstName", last_name AS "lastName", email, is_admin AS "isAdmin"`,
       [username, hashedPassword, firstName, lastName, email, isAdmin]
     );
 
@@ -66,7 +79,6 @@ class User {
     return user;
   }
 
-  
   //Get all info about a user
   static async getUserInfo(username) {
     const userRes = await db.query(
@@ -87,26 +99,27 @@ class User {
     return user;
   }
 
-  //Delete a user 
+  //Delete a user
   static async delete(username) {
-    try {
-      const res = await db.query(`
-      DELETE FROM users WHERE username = $1
-    `, [username]);
-      return ({message: 'success'})
-    } catch (err){
-      return ({error: err})
-    }
+    const res = await db.query(
+      `
+      DELETE FROM users WHERE username = $1 RETURNING username
+    `,
+      [username]
+    );
+    const user = res.rows[0];
+
+    if (!user) throw new NotFoundError(`No user: ${username}`);
+
+    return { deleted: username };
   }
 
-  //Update a user  
+  //Update a user
   static async update(username, data) {
-    const { setCols, values } = sqlForPartialUpdate(
-        data,
-        {
-          firstName: "first_name",
-          lastName: "last_name"
-        });
+    const { setCols, values } = sqlForPartialUpdate(data, {
+      firstName: "first_name",
+      lastName: "last_name",
+    });
     const usernameVarIdx = "$" + (values.length + 1);
 
     const querySql = `UPDATE users 
@@ -115,17 +128,15 @@ class User {
                       RETURNING username, 
                                 last_name AS "lastName", 
                                 first_name AS "firstName", 
-                                email `;
-                                
+                                email,
+                                is_admin`;
+
     const result = await db.query(querySql, [...values, username]);
     const user = result.rows[0];
-
     if (!user) throw new NotFoundError(`No user: ${username}`);
 
     return user;
   }
-
-
 }
 
 module.exports = User;

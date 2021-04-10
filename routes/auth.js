@@ -37,10 +37,10 @@ router.post("/register", async function (req, res, next) {
 
 router.post("/login", async function (req, res, next) {
   try {
-    console.log('hello')
     const validator = jsonschema.validate(req.body, userAuthSchema);
     if (!validator.valid) {
       const errs = validator.errors.map((e) => e.stack);
+
       throw new BadRequestError();
     }
     const { username, password } = req.body;

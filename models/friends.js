@@ -2,7 +2,11 @@
 
 const db = require("../db");
 const { textParser } = require("../helpers/textParser");
-const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
+const {
+  NotFoundError,
+  BadRequestError,
+  UnauthorizedError,
+} = require("../expressError");
 const { sqlForPartialUpdate } = require("../helpers/sql");
 
 class Friend {
@@ -67,24 +71,21 @@ class Friend {
 
     if (!friend) throw new NotFoundError(`No friend: ${username}`);
 
-    return user;
+    return friend;
   }
 
   //Delete a friend
   static async delete(username, id) {
-    try {
-      const res = await db.query(
-        `
-      DELETE FROM friends WHERE username = $1 AND id = $2
+    const res = await db.query(
+      `
+      DELETE FROM friends WHERE username = $1 AND id = $2 RETURNING username
     `,
-        [username, id]
-      );
-      return { message: "success" };
-    } catch (err) {
-      return { error: err };
-    }
+      [username, id]
+    );
+    const friend = res.rows[0];
+    if (!friend) throw new NotFoundError(`No friend: ${id}`);
+    return { message: "success" };
   }
 }
-
 
 module.exports = Friend;

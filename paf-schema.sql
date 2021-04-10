@@ -14,9 +14,9 @@ CREATE TABLE users (
 
 CREATE TABLE friends (
   id SERIAL NOT NULL PRIMARY KEY,
-  name VARCHAR(25),
-  username VARCHAR(25) REFERENCES users ON DELETE CASCADE,
-  description VARCHAR(55)
+  name VARCHAR(25) NOT NULL,
+  username VARCHAR(25) REFERENCES users ON DELETE CASCADE NOT NULL,
+  description VARCHAR(55) NOT NULL
 );
 
 CREATE TABLE statements ( 

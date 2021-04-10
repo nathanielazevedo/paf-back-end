@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/addFriend.json",
+  "type": "object",
+  "properties": {
+    "statement_id": {
+      "type": "number"
+    },
+    "response": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": ["statement_id", "response"]
+}

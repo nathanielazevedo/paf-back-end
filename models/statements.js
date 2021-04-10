@@ -2,9 +2,12 @@
 
 const db = require("../db");
 const { textParser } = require("../helpers/textParser");
-const { NotFoundError, BadRequestError, UnauthorizedError } = require("../expressError");
+const {
+  NotFoundError,
+  BadRequestError,
+  UnauthorizedError,
+} = require("../expressError");
 const { sqlForPartialUpdate } = require("../helpers/sql");
-
 
 class Statement {
   //Add a statment.
@@ -61,17 +64,14 @@ class Statement {
 
   //Delete a statement
   static async delete(username, id) {
-    try {
-      const res = await db.query(
-        `
-      DELETE FROM statements WHERE username = $1 AND id = $2
+    const res = await db.query(
+      `
+      DELETE FROM statements WHERE username = $1 AND id = $2 RETURNING username
     `,
-        [username, id]
-      );
-      return { message: "success" };
-    } catch (err) {
-      return { error: err };
-    }
+      [username, id]
+    );
+    if (!res.rows[0]) throw new NotFoundError(`No statement ${id}`);
+    return { message: "success" };
   }
 }
 

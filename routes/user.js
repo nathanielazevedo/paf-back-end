@@ -4,13 +4,14 @@ const express = require("express");
 const router = new express.Router();
 const User = require("../models/user");
 const jsonschema = require("jsonschema");
-const {ensureCorrectUserOrAdmin} = require("../middleware/auth")
+const { ensureCorrectUserOrAdmin } = require("../middleware/auth");
+const updateUserSchema = require("../schemas/updateUser.json");
+const { NotFoundError, BadRequestError } = require("../expressError");
 
 
 
-router.get("/:username", async function (req, res, next) {
+router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
-      console.log('here')
       const username = req.params.username;
       const user = await User.getUserInfo(username);
       return res.json(user);
@@ -32,7 +33,12 @@ router.delete("/:username", ensureCorrectUserOrAdmin, async function (req, res, 
 );
 
 router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
-    try {
+  try {
+      const validator = jsonschema.validate(req.body, updateUserSchema);
+      if (!validator.valid) {
+        const errs = validator.errors.map((e) => e.stack);
+        throw new BadRequestError();
+      }
       const username = req.params.username;
       const data = req.body;
       const message = await User.update(username, data);

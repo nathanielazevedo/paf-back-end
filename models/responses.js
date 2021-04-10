@@ -9,8 +9,6 @@ const {
 } = require("../expressError");
 const { sqlForPartialUpdate } = require("../helpers/sql");
 
-
-
 class Response {
   //Create a response.
   static async create({ response, statement_id, username }) {
@@ -23,17 +21,15 @@ class Response {
 
   //Delete a response
   static async delete(username, id) {
-    try {
-      const res = await db.query(
-        `
-      DELETE FROM responses WHERE username = $1 AND id = $2
+    const res = await db.query(
+      `
+      DELETE FROM responses WHERE username = $1 AND id = $2 RETURNING username
     `,
-        [username, id]
-      );
-      return { message: "success" };
-    } catch (err) {
-      return { error: err };
-    }
+      [username, id]
+    );
+
+    if (!res.rows[0]) throw new NotFoundError(`No response ${id}`);
+    return { message: "success" };
   }
 
   //Update a response
@@ -59,6 +55,5 @@ class Response {
     return response;
   }
 }
-
 
 module.exports = Response;
