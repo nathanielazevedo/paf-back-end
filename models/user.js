@@ -11,11 +11,12 @@ const {
 const { sqlForPartialUpdate } = require("../helpers/sql");
 
 class User {
-  //Handle user authentication.
+  //Handle user login.
   static async authenticate(username, password) {
     try {
       const result = await db.query(
-        `SELECT username,
+        `SELECT 
+                username,
                 password,
                 first_name AS "firstName",
                 last_name AS "lastName",
@@ -35,6 +36,7 @@ class User {
           delete user.password;
           return user;
         } else {
+          
           throw new UnauthorizedError("Invalid username/password");
         }
       } else {
