@@ -24,12 +24,11 @@ While learning Spanish, I used a lot of different apps that connect you to langu
 
 ## Skills practiced
 * Routing
-* Sending / consuming JSON
+* Sending / consuming JSON data
 * Form submission
-* DOM manipulation
-* CSS styling and animation
-* Building React Components
-* State Mangagement
+* JWT's
+* Middleware
+* Heroku
 
 
 ## Status
