@@ -15,11 +15,12 @@ router.post(
   ensureCorrectUserOrAdmin,
   async function (req, res, next) {
     try {
-      const validator = jsonschema.validate(req.body, addStatementSchema);
-      if (!validator.valid) {
-        const errs = validator.errors.map((e) => e.stack);
-        throw new BadRequestError();
-      }
+      // const validator = jsonschema.validate(req.body, addStatementSchema);
+      // if (!validator.valid) {
+      //   const errs = validator.errors.map((e) => e.stack);
+      //   throw new BadRequestError();
+      // }
+      console.log('adding')
       const data = req.body;
       data.username = req.params.username;
       const statement = await Statement.create(data);

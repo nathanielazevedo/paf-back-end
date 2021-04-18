@@ -9,9 +9,9 @@ let DB_URI = getDatabaseUri();
 
   const client = new Client({
     connectionString: DB_URI,
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    // ssl: {
+    //   rejectUnauthorized: false,
+    // },
   });
 
 client.connect();
