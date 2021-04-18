@@ -1,4 +1,4 @@
-# Program A Friend Back-End![GitHub language count](https://img.shields.io/github/languages/count/nathanielazevedo/paf-back)
+# Program A Friend Front-End![GitHub language count](https://img.shields.io/github/languages/count/nathanielazevedo/paf-back)
 > Don't make friends, program them.
 
 
@@ -9,7 +9,7 @@ Need a language learning partner? Program one. This app allows you to create and
 While learning Spanish, I used a lot of different apps that connect you to language learning partners. They would never be online when I wanted to practice. Now I have a partner that ready to practice when I am. 
 
 ## Screenshots
-![Example screenshot](./source/assets/cover.png)
+![Example screenshot](./src/assets/cover.png)
 
 ## Technologies
 * Node
