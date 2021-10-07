@@ -15,7 +15,7 @@
     "email": {
       "type": "string"
     },
-        "password": {
+    "color": {
       "type": "string"
     }
   },

@@ -37,6 +37,7 @@ router.patch("/:username", ensureCorrectUserOrAdmin, async function (req, res, n
       const validator = jsonschema.validate(req.body, updateUserSchema);
       if (!validator.valid) {
         const errs = validator.errors.map((e) => e.stack);
+        console.log(errs)
         throw new BadRequestError();
       }
       const username = req.params.username;
